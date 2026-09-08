@@ -1,0 +1,40 @@
+workflows:
+  # FLUJO DE COMPILACIÓN AUTOMÁTICA PARA iOS Y ANDROID
+  propnext-release:
+    name: PropNext Industrial Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      # 1. Obtener librerías de Flutter
+      - name: Instalar dependencias
+        script: |
+          flutter packages pub get
+      
+      # 2. Compilar binario de Android (APK instalable)
+      - name: Compilar Android APK
+        script: |
+          flutter build apk --release
+
+      # 3. Compilar para iOS (Generación del archivo IPA para Apple)
+      - name: Compilar iOS para Apple Developer
+        script: |
+          flutter build ios --release --no-codesign
+    
+    # Archivos generados listos para descargar o publicar en la App Store
+    artifacts:
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/ios/iphoneos/*.app
+    
+    # Notificación de compilación exitosa
+    publishing:
+      email:
+        recipients:
+          - tu_correo@empresa.com
+        notify:
+          success: true
+          failure: true
