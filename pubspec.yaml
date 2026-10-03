@@ -1,15 +1,27 @@
-name: propnext_mobile
-description: "Plataforma Movil Institucional de Infraestructura Logistica e Industrial del Peru"
-publish_to: 'none'
+name: operia
+description: "Operia - Espacios para tu operación e inversión. App B2B Inmobiliaria."
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.1.0
+  # Conexión con tu base de datos MySQL (api.php)
+  http: ^1.2.0
+  # Almacenamiento local de sesión y tokens
+  shared_preferences: ^2.2.2
+  # Apertura de WhatsApp y llamadas directas
+  url_launcher: ^6.2.4
+  # Cámara y galería de fotos nativa para publicar naves
+  image_picker: ^1.0.7
+  # Carga rápida y caché de fotos reales
+  cached_network_image: ^3.3.1
+  # Tipografía corporativa Barlow
+  google_fonts: ^6.1.0
+  # Iconos modernos
   cupertino_icons: ^1.0.6
 
 dev_dependencies:

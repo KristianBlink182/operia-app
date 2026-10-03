@@ -1,7 +1,24 @@
 workflows:
-  # FLUJO DE COMPILACIÓN AUTOMÁTICA PARA iOS Y ANDROID
-  propnext-release:
-    name: PropNext Industrial Build
+  # WORKFLOW 1: GENERACIÓN DE APK PARA ANDROID
+  android-release:
+    name: Operia Android APK Release
+    max_build_duration: 30
+    instance_type: mac_mini_m1
+    environment:
+      flutter: stable
+    scripts:
+      - name: Instalar dependencias
+        script: |
+          flutter packages get
+      - name: Compilar APK de Producción
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+
+  # WORKFLOW 2: SUBIDA A APPLE APP STORE CONNECT
+  ios-app-store:
+    name: Operia iOS App Store Release
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
@@ -9,32 +26,12 @@ workflows:
       xcode: latest
       cocoapods: default
     scripts:
-      # 1. Obtener librerías de Flutter
-      - name: Instalar dependencias
+      - name: Instalar dependencias Flutter y Pods
         script: |
-          flutter packages pub get
-      
-      # 2. Compilar binario de Android (APK instalable)
-      - name: Compilar Android APK
+          flutter packages get
+          cd ios && pod install && cd ..
+      - name: Compilar IPA para App Store
         script: |
-          flutter build apk --release
-
-      # 3. Compilar para iOS (Generación del archivo IPA para Apple)
-      - name: Compilar iOS para Apple Developer
-        script: |
-          flutter build ios --release --no-codesign
-    
-    # Archivos generados listos para descargar o publicar en la App Store
+          flutter build ipa --release
     artifacts:
-      - build/**/outputs/**/*.apk
-      - build/**/outputs/**/*.aab
-      - build/ios/iphoneos/*.app
-    
-    # Notificación de compilación exitosa
-    publishing:
-      email:
-        recipients:
-          - tu_correo@empresa.com
-        notify:
-          success: true
-          failure: true
+      - build/ios/ipa/*.ipa
