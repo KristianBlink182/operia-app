@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -30,7 +30,7 @@ class OperiaApp extends StatelessWidget {
           primary: operiaBlue,
           secondary: operiaTeal,
         ),
-        textTheme: GoogleFonts.barlowTextTheme(),
+        
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: operiaBlue,
