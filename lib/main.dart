@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Text(
                                     item['title'] ?? 'Inmueble Industrial',
                                     maxLines: 1,
-                                    overflow: TextTruncate.ellipsis,
+                                    overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: operiaBlue),
                                   ),
                                   const SizedBox(height: 8),

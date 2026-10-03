@@ -20,7 +20,7 @@ dependencies:
   # Carga rápida y caché de fotos reales
   cached_network_image: ^3.3.1
   # Tipografía corporativa Barlow
-  google_fonts: ^6.1.0
+  google_fonts: 6.1.0
   # Iconos modernos
   cupertino_icons: ^1.0.6
 
